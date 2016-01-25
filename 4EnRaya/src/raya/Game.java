@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Game {
 
 	public static Scanner dato = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
 
 		char tipoTablero;
@@ -18,7 +18,7 @@ public class Game {
 		System.out.println("4 EN RAYA");
 		System.out.println("*********");
 		System.out.println("Quieres un tablero personalizado? (s/n)");
-		
+
 		tipoTablero = dato.next().charAt(0);
 		while (tipoTablero != 's' && tipoTablero != 'n') {
 			error();
@@ -99,8 +99,7 @@ public class Game {
 			mostrarTablero(tablero);
 			System.out.println("Escoge la columna en la que dejar la ficha:");
 			x = dato.nextInt();
-			while (x <= 0 || x > tablero.length
-					|| tiradas[x - 1] == tablero[0].length) {
+			while (x <= 0 || x > tablero.length || tiradas[x - 1] == tablero[0].length) {
 				error();
 				x = dato.nextInt();
 			}
@@ -150,8 +149,7 @@ public class Game {
 		System.out.println("");
 	}
 
-	public static int tirada(char tablero[][], int x, int jugador, char j1,
-			char j2) {
+	public static int tirada(char tablero[][], int x, int jugador, char j1, char j2) {
 		int cont = 0;
 		while (cont < tablero[0].length && tablero[x][cont] == ' ') {
 			cont++;
@@ -164,8 +162,7 @@ public class Game {
 		return cont - 1;
 	}
 
-	public static boolean comprovarGanado(char tablero[][], int x, int jugador,
-			char j1, char j2, int y) {
+	public static boolean comprovarGanado(char tablero[][], int x, int jugador, char j1, char j2, int y) {
 		boolean ganado = false;
 		char car;
 		int contCar = 1;
@@ -176,43 +173,28 @@ public class Game {
 			car = j2;
 		}
 
-		if (x + 1 < tablero.length) {
-			if (tablero[x + 1][y] == car) {
+		if (x + 1 < tablero.length && tablero[x + 1][y] == car) {
+			contCar++;
+			if (x + 2 < tablero.length && tablero[x + 2][y] == car) {
 				contCar++;
-				if (x + 2 < tablero.length) {
-					if (tablero[x + 2][y] == car) {
-						contCar++;
-						if (x + 3 < tablero.length) {
-							if (tablero[x + 3][y] == car) {
-								contCar++;
-							}
-						}
-					}
-
+				if (x + 3 < tablero.length && tablero[x + 3][y] == car) {
+					contCar++;
 				}
 			}
-
 		}
 
-		if (x - 1 >= 0) {
-			if (tablero[x - 1][y] == car) {
+		if (x - 1 >= 0 && tablero[x - 1][y] == car) {
+			contCar++;
+			if (x - 2 >= 0 && tablero[x - 2][y] == car) {
 				contCar++;
-				if (x - 2 >= 0) {
-					if (tablero[x - 2][y] == car) {
-						contCar++;
-						if (x - 3 >= 0) {
-							if (tablero[x - 3][y] == car) {
-								contCar++;
-							}
-						}
-					}
-
+				if (x - 3 >= 0 && tablero[x - 3][y] == car) {
+					contCar++;
 				}
 			}
-
 		}
+		if (contCar >= 4)
 
-		if (contCar >= 4) {
+		{
 			ganado = true;
 			return ganado;
 		}
@@ -222,37 +204,25 @@ public class Game {
 		if (y - 1 >= 0) {
 			if (tablero[x][y - 1] == car) {
 				contCar++;
-				if (y - 2 >= 0) {
-					if (tablero[x][y - 2] == car) {
+				if (y - 2 >= 0 && tablero[x][y - 2] == car) {
+					contCar++;
+					if (y - 3 >= 0 && tablero[x][y - 3] == car) {
 						contCar++;
-						if (y - 3 >= 0) {
-							if (tablero[x][y - 3] == car) {
-								contCar++;
-							}
-						}
 					}
-
 				}
 			}
-
 		}
 
 		if (y + 1 < tablero[0].length) {
 			if (tablero[x][y + 1] == car) {
 				contCar++;
-				if (y + 2 < tablero[0].length) {
-					if (tablero[x][y + 2] == car) {
+				if (y + 2 < tablero[0].length && tablero[x][y + 2] == car) {
+					contCar++;
+					if (y + 3 < tablero[0].length && tablero[x][y + 3] == car) {
 						contCar++;
-						if (y + 3 < tablero[0].length) {
-							if (tablero[x][y + 3] == car) {
-								contCar++;
-							}
-						}
 					}
-					
 				}
 			}
-			
 		}
 
 		if (contCar >= 4) {
@@ -274,28 +244,20 @@ public class Game {
 							}
 						}
 					}
-					
 				}
 			}
-			
 		}
 
 		if (x + 1 < tablero.length && y + 1 < tablero[0].length) {
 			if (tablero[x + 1][y + 1] == car) {
 				contCar++;
-				if (x + 2 < tablero.length && y + 2 < tablero[0].length) {
-					if (tablero[x + 2][y + 2] == car) {
+				if (x + 2 < tablero.length && y + 2 < tablero[0].length && tablero[x + 2][y + 2] == car) {
+					contCar++;
+					if (x + 3 < tablero.length && y + 3 < tablero[0].length && tablero[x + 3][y + 3] == car) {
 						contCar++;
-						if (x + 3 < tablero.length && y + 3 < tablero[0].length) {
-							if (tablero[x + 3][y + 3] == car) {
-								contCar++;
-							}
-						}
 					}
-					
 				}
 			}
-			
 		}
 
 		if (contCar >= 4) {
@@ -305,43 +267,29 @@ public class Game {
 
 		contCar = 1;
 
-		if (y - 1 >= 0 && x + 1 < tablero.length) {
-			if (tablero[x + 1][y - 1] == car) {
+		if (y - 1 >= 0 && x + 1 < tablero.length && tablero[x + 1][y - 1] == car) {
+			contCar++;
+			if (y - 2 >= 0 && x + 2 < tablero.length && tablero[x + 2][y - 2] == car) {
 				contCar++;
-				if (y - 2 >= 0 && x + 2 < tablero.length) {
-					if (tablero[x + 2][y - 2] == car) {
-						contCar++;
-						if (y - 3 >= 0 && x + 3 < tablero.length) {
-							if (tablero[x + 3][y - 3] == car) {
-								contCar++;
-							}
-						}
-					}
-					
+				if (y - 3 >= 0 && x + 3 < tablero.length && tablero[x + 3][y - 3] == car) {
+					contCar++;
 				}
 			}
-			
 		}
 
-		if (x - 1 >= 0 && y + 1 < tablero[0].length) {
-			if (tablero[x - 1][y + 1] == car) {
+		if (x - 1 >= 0 && y + 1 < tablero[0].length && tablero[x - 1][y + 1] == car) {
+			contCar++;
+			if (x - 2 >= 0 && y + 2 < tablero[0].length && tablero[x - 2][y + 2] == car) {
 				contCar++;
-				if (x - 2 >= 0 && y + 2 < tablero[0].length) {
-					if (tablero[x - 2][y + 2] == car) {
-						contCar++;
-						if (x - 3 >= 0 && y + 3 < tablero[0].length) {
-							if (tablero[x - 3][y + 3] == car) {
-								contCar++;
-							}
-						}
-					}
-					
+				if (x - 3 >= 0 && y + 3 < tablero[0].length && tablero[x - 3][y + 3] == car) {
+					contCar++;
 				}
 			}
-			
 		}
 
-		if (contCar >= 4) {
+		if (contCar >= 4)
+
+		{
 			ganado = true;
 			return ganado;
 		}
@@ -349,6 +297,7 @@ public class Game {
 		contCar = 1;
 
 		return (ganado);
+
 	}
 
 	public static int cambioJugador(int jugador) {
