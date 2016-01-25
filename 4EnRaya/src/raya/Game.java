@@ -1,9 +1,11 @@
 package raya;
 
-import Keyboard.*;
+import java.util.Scanner;
 
 public class Game {
 
+	public static Scanner dato = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 
 		char tipoTablero;
@@ -16,10 +18,11 @@ public class Game {
 		System.out.println("4 EN RAYA");
 		System.out.println("*********");
 		System.out.println("Quieres un tablero personalizado? (s/n)");
-		tipoTablero = Keyboard.readChar();
+		
+		tipoTablero = dato.next().charAt(0);
 		while (tipoTablero != 's' && tipoTablero != 'n') {
 			error();
-			tipoTablero = Keyboard.readChar();
+			tipoTablero = dato.next().charAt(0);
 		}
 		if (tipoTablero == 's') {
 			tableroMedidas[1] = crearTableroFilas();
@@ -28,10 +31,10 @@ public class Game {
 		tablero = new char[tableroMedidas[0]][tableroMedidas[1]];
 		tablero = llenarTablero(tablero);
 		System.out.println("Jugador 1, escoge tu ficha: (x/o)");
-		j1 = Keyboard.readChar();
+		j1 = dato.next().charAt(0);
 		while (j1 != 'x' && j1 != 'o') {
 			error();
-			j1 = Keyboard.readChar();
+			j1 = dato.next().charAt(0);
 		}
 		if (j1 == 'x') {
 			j1 = 'X';
@@ -53,10 +56,10 @@ public class Game {
 	public static int crearTableroColumnas() {
 		int a;
 		System.out.println("Introduce numero de columnas [4,30]");
-		a = Keyboard.readInt();
+		a = dato.nextInt();
 		while (a < 4 || a > 30) {
 			error();
-			a = Keyboard.readInt();
+			a = dato.nextInt();
 		}
 		return (a);
 	}
@@ -64,10 +67,10 @@ public class Game {
 	public static int crearTableroFilas() {
 		int a;
 		System.out.println("Introduce numero de filas [4,20]");
-		a = Keyboard.readInt();
+		a = dato.nextInt();
 		while (a < 4 || a > 20) {
 			error();
-			a = Keyboard.readInt();
+			a = dato.nextInt();
 		}
 		return (a);
 	}
@@ -95,11 +98,11 @@ public class Game {
 			System.out.println("Turno del jugador " + jugador + ".");
 			mostrarTablero(tablero);
 			System.out.println("Escoge la columna en la que dejar la ficha:");
-			x = Keyboard.readInt();
+			x = dato.nextInt();
 			while (x <= 0 || x > tablero.length
 					|| tiradas[x - 1] == tablero[0].length) {
 				error();
-				x = Keyboard.readInt();
+				x = dato.nextInt();
 			}
 			x--;
 			tiradas[x]++;
@@ -113,7 +116,7 @@ public class Game {
 		} else {
 			System.out.println("Ha ganado el jugador 1");
 		}
-		x = Keyboard.readInt();
+		x = dato.nextInt();
 	}
 
 	public static void mostrarTablero(char tablero[][]) {
